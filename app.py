@@ -12,7 +12,7 @@ list_addr = list(par.values())
 y_list = [pd["Y"] for pd in acr["AddressData"]["AddressPoint"]]
 x_list = [pd["X"] for pd in acr["AddressData"]["AddressPoint"]]
 
-def search_name_1():
+def search_name_1(event):
 	name = e11.get()
 	RoadName, RoadNumber = GL.get_addr_from_name(name)
 	y,x = GL.get_coord_from_addr(RoadName,RoadNumber)
@@ -33,7 +33,7 @@ def search_name_1():
 		e31.insert(10, y)
 		e41.insert(10, x)
 	calc_distance()
-def search_name_2():
+def search_name_2(event):
 	name = e12.get()
 	RoadName, RoadNumber = GL.get_addr_from_name(name)
 	y,x = GL.get_coord_from_addr(RoadName,RoadNumber)
@@ -54,7 +54,7 @@ def search_name_2():
 		e32.insert(10, y)
 		e42.insert(10, x)
 	calc_distance()
-def search_addr_1():
+def search_addr_1(event):
 	addr = e21.get()
 	if len(addr.split(" "))>1:
 		RoadName = addr.split(" ")[0]
@@ -80,7 +80,7 @@ def search_addr_1():
 		e31.insert(10, y)
 		e41.insert(10, x)
 	calc_distance()
-def search_addr_2():
+def search_addr_2(event):
 	addr = e22.get()
 	if len(addr.split(" "))>1:
 		RoadName = addr.split(" ")[0]
@@ -106,7 +106,7 @@ def search_addr_2():
 		e32.insert(10, y)
 		e42.insert(10, x)
 	calc_distance()
-def search_coord_1():
+def search_coord_1(event):
 	y = e31.get()
 	x = e41.get()
 	RoadName, RoadNumber = GL.get_addr_from_coord(y,x)
@@ -129,7 +129,7 @@ def search_coord_1():
 		e11.insert(10, name)
 		e11.selection(None)
 	calc_distance()
-def search_coord_2():
+def search_coord_2(event):
 	y = e32.get()
 	x = e42.get()
 	RoadName, RoadNumber = GL.get_addr_from_coord(y,x)
@@ -162,20 +162,21 @@ def calc_distance():
 		labelText.set("Distance: Choose two positions")
 	else:
 		dist = GL.calc_euclidean_distance(ya,xa,yb,xb)
-		labelText.set("Distance: "+str(dist))
+		labelText.set("Distance: "+"{0:.2f}".format(dist))
 
 
 top = Tk()
+top.title("Main")
 
 top.minsize(width=500, height=250)
 
-Button(top, text="Name", command=search_name_1).grid(row=0)
-Button(top, text="Address", command=search_addr_1).grid(row=1)
-Button(top, text="Coordinates", command=search_coord_1).grid(row=2)
+Label(top, text="Name").grid(row=0)
+Label(top, text="Address").grid(row=1)
+Label(top, text="Coordinates").grid(row=2)
 
-Button(top, text="Name", command=search_name_2).grid(row=0, column=3)
-Button(top, text="Address", command=search_addr_2).grid(row=1, column=3)
-Button(top, text="Coordinates", command=search_coord_2).grid(row=2, column=3)
+Label(top, text="Name").grid(row=0, column=3)
+Label(top, text="Address").grid(row=1, column=3)
+Label(top, text="Coordinates").grid(row=2, column=3)
 
 
 
@@ -189,7 +190,14 @@ e22 = AutocompleteEntry(list_addr, top)
 e32 = Entry(top)
 e42 = Entry(top)
 
-
+e11.bind("<Return>", search_name_1)
+e21.bind("<Return>", search_addr_1)
+e31.bind("<Return>", search_coord_1)
+e41.bind("<Return>", search_coord_1)
+e12.bind("<Return>", search_name_2)
+e22.bind("<Return>", search_addr_2)
+e32.bind("<Return>", search_coord_2)
+e42.bind("<Return>", search_coord_2)
 
 e11.grid(row=0, column=1)
 e21.grid(row=1, column=1)
