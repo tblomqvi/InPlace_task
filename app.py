@@ -162,7 +162,7 @@ def calc_distance():
 		labelText.set("Distance: Choose two positions")
 	else:
 		dist = GL.calc_euclidean_distance(ya,xa,yb,xb)
-		labelText.set("Distance: "+"{0:.2f}".format(dist))
+		labelText.set("Distance: "+"{0:.2f}".format(dist)+" m")
 
 
 top = Tk()
