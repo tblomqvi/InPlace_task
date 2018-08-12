@@ -158,7 +158,7 @@ def calc_distance():
 	xa = e41.get()
 	yb = e32.get()
 	xb = e42.get()
-	if ya =="None" or yb =="None":
+	if ya =="None" or yb =="None" or ya =="" or yb =="":
 		labelText.set("Distance: Choose two positions")
 	else:
 		dist = GL.calc_euclidean_distance(ya,xa,yb,xb)
