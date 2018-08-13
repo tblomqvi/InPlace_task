@@ -1,0 +1,9 @@
+Henkilö,	Osoite
+Winston Smith,Kruunupyyntie 20
+Emmanuel Goldstein,Hästöntie 197
+Julia,Koskenniemenkuja 5
+O'Brien,Kruunupyyntie 206
+Aaronson,Hästöntie 857
+Jones,Kruunupyyntie 13
+Rutherford,Kruunupyyntie 185
+Tom Parsons,Riskaraitti 30
